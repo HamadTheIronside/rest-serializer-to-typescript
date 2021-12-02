@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from src.main import Transpiler
+from rest_serializer_to_typescript import Transpiler
 
 
 class UserSerializer(serializers.Serializer):
