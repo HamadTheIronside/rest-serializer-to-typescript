@@ -2,5 +2,5 @@
 
 ## How to install?
 
-    `pip install rest-serializer-to-typescript`
+    pip install rest-serializer-to-typescript
 
