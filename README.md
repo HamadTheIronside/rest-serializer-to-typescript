@@ -1,6 +1,6 @@
 # Rest Serializer to TypeScript
 
-It's an app to convert a serializer to typescript interface
+It's an app to convert a serializer to a typescript interface
 
 ## How to install?
 
