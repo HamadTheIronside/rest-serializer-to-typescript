@@ -1,5 +1,7 @@
 # Rest Serializer to TypeScript
 
+It's an app to convert a serializer to typescript interface
+
 ## How to install?
 
     pip install rest-serializer-to-typescript
