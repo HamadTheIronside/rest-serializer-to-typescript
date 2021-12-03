@@ -1,4 +1,6 @@
-from rest_framework.fields import ListField, SerializerMethodField
+from typing import Optional
+
+from rest_framework.fields import ListField, SerializerMethodField, ChoiceField, FileField
 from rest_framework.serializers import ListSerializer
 
 from .mapping import mappings
@@ -23,7 +25,7 @@ class Transpiler:
         fields = ";\n    ".join(self.get_fields_type())
 
         return f"""{self.pre_append}export interface I{self.get_serializer_name()} {{
-    {fields};
+    {f"{fields};" if fields else ""}
 }}{self.post_append}"""
 
     def get_fields_type(self) -> list[str]:
@@ -31,7 +33,8 @@ class Transpiler:
 
         for field_name, field_class in self.serializer._declared_fields.items():
             ts_type = self.get_field_type(field_name, field_class)
-            types.append(ts_type)
+            if ts_type:
+                types.append(ts_type)
 
         return types
 
@@ -63,7 +66,7 @@ class Transpiler:
 
         return f"{field_name}{'' if field_class.required else '?'}: {ts_type}"
 
-    def get_field_type(self, field_name, field_class) -> str:
+    def get_field_type(self, field_name, field_class) -> Optional[str]:
         if isinstance(field_class, ListSerializer) or isinstance(field_class, ListField):
             return self.get_list_serializer_type(field_name, field_class)
 

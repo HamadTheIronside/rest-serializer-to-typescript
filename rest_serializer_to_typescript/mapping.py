@@ -4,6 +4,8 @@ mappings = {
     serializers.BooleanField: 'boolean',
     serializers.NullBooleanField: 'boolean',
     serializers.CharField: 'string',
+    serializers.ChoiceField: 'string',
+    serializers.FileField: "string",
     serializers.EmailField: 'string',
     serializers.RegexField: 'string',
     serializers.SlugField: 'string',
