@@ -15,7 +15,7 @@ class Transpiler:
         if parents is None:
             parents = []
 
-        self.serializer = serializer
+        self.serializer = serializer()
         self.pre_append = ""
         self.post_append = ""
         self.parents = parents
