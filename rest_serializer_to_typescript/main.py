@@ -15,7 +15,7 @@ class Transpiler:
         if parents is None:
             parents = []
 
-        self.serializer = serializer()
+        self.serializer = serializer
         self.pre_append = ""
         self.post_append = ""
         self.parents = parents
@@ -31,7 +31,7 @@ class Transpiler:
     def get_fields_type(self) -> list[str]:
         types: list[str] = []
 
-        for field_name, field_class in self.serializer._declared_fields.items():
+        for field_name, field_class in self.serializer.get_fields().items():
             ts_type = self.get_field_type(field_name, field_class)
             if ts_type:
                 types.append(ts_type)

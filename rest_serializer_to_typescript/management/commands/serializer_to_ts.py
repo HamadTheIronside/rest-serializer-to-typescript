@@ -51,7 +51,7 @@ class Command(BaseCommand):
 
             typescript = ""
             for serializer in serializers:
-                typescript += f"{Transpiler(serializer).generate_ts()}\n\n"
+                typescript += f"{Transpiler(serializer()).generate_ts()}\n\n"
 
             with open(export_target, "w") as file:
                 file.write(typescript)
