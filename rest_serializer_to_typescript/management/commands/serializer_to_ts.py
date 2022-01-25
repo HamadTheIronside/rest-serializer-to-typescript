@@ -24,8 +24,6 @@ class Command(BaseCommand):
         if not target_serializers:
             return
 
-        Path(final_settings.get("OUTPUT", "")).mkdir(parents=True, exist_ok=True)
-
         for serializer_module, export_target in target_serializers.items():
             print(f"Exporting {serializer_module} to {export_target}: Started")
 
