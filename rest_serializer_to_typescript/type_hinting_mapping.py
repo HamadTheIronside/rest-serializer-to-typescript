@@ -1,5 +1,6 @@
 type_hinting_mapping = {
     "str": "string",
     "int": "number",
-    "float": "number"
+    "float": "number",
+    "bool": "boolean"
 }

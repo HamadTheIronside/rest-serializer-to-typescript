@@ -1,0 +1,14 @@
+Django~=3.2.9
+py~=1.11.0
+pip~=21.3.1
+toml~=0.10.2
+attrs~=21.2.0
+pytz~=2021.3
+sqlparse~=0.4.2
+asgiref~=3.4.1
+pytest~=6.2.5
+pluggy~=1.0.0
+iniconfig~=1.1.1
+pyparsing~=3.0.6
+setuptools~=57.4.0
+djangorestframework~=3.12.4

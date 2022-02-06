@@ -8,7 +8,7 @@ from rest_framework.serializers import BaseSerializer, SerializerMetaclass
 from rest_serializer_to_typescript import Transpiler
 
 DEFAULT_SETTINGS = {
-    "OUTPUT": "types/",
+    "META_DATA": "rest_framework.metadata.SimpleMetadata",
     "SERIALIZERS": {}
 }
 

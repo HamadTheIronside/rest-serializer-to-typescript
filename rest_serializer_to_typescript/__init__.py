@@ -1,4 +1,5 @@
 from .main import Transpiler
+from .schema_generator import SerializerMetadataTypeGenerator
 from .mapping import mappings
 from .type_hinting_mapping import type_hinting_mapping
 

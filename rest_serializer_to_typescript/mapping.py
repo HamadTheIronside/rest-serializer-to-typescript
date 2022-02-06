@@ -21,4 +21,5 @@ mappings = {
     serializers.TimeField: 'string',
     serializers.DurationField: 'string',
     serializers.DictField: 'Map',
+    serializers.PrimaryKeyRelatedField: "number"
 }

@@ -1,6 +1,7 @@
+import json
 from typing import Optional
 
-from rest_framework.fields import ListField, SerializerMethodField, ChoiceField, FileField
+from rest_framework.fields import ListField, SerializerMethodField
 from rest_framework.serializers import ListSerializer
 
 from .mapping import mappings
@@ -25,8 +26,27 @@ class Transpiler:
         fields = ";\n    ".join(self.get_fields_type())
 
         return f"""{self.pre_append}export interface I{self.get_serializer_name()} {{
+    {self.generate_extra_fields()}
     {f"{fields};" if fields else ""}
 }}{self.post_append}"""
+
+    def generate_extra_fields(self) -> str:
+        serializer = self.serializer
+
+        meta = getattr(serializer, "Meta", None)
+
+        data = []
+        if __type := getattr(meta, "__type", None):
+            data.append(["__type", __type])
+        elif modal := getattr(meta, "model", None):
+            data.append(["__type", modal.__name__.lower()])
+
+        if (__set_as_modal := getattr(meta, "__set_as_modal", None)) is not None:
+            data.append(["__is_modal", json.dumps(bool(__set_as_modal))])
+        else:
+            data.append(["__is_modal", json.dumps(bool(getattr(meta, "modal", None)))])
+
+        return "\n    ".join([f"{field}: {value};" for field, value in data])
 
     def get_fields_type(self) -> list[str]:
         types: list[str] = []

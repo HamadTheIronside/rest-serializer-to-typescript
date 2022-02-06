@@ -13,6 +13,7 @@ It's an app to convert a serializer to a typescript interface
 
 ```python
 REST_SERIALIZERS_TO_TYPESCRIPT = {
+    "META_DATA": "rest_framework.metadata.SimpleMetadata",
     "SERIALIZERS": {
         "your_serializer_1_path": "output_1_address",
         "your_serializer_2_path": "output_2_address",
@@ -24,9 +25,12 @@ For example:
 
 ```python
 REST_SERIALIZERS_TO_TYPESCRIPT = {
+    "META_DATA": "rest_framework.metadata.SimpleMetadata",
     "SERIALIZERS": {
         "myapp.serializers": "types/myapp_types.ts",
         "custom_app.serializers": "types/custom_app_types.ts",
     }
 }
 ```
+
+3. Run `./manage.py serializer_to_ts`
