@@ -25,9 +25,6 @@ class SerializerMetadataTypeGenerator:
             else:
                 ts_value = type_hinting_mapping.get(type(value).__name__, "unknown")
 
-                if type_hinting_mapping.get(type(value).__name__) is None:
-                    print(f"NOTE: {type(value).__name__} is not registered in type_hinting_mapping")
-
             if field_name == "child":
                 sub_serializer = self.serializer.fields[name]
 
