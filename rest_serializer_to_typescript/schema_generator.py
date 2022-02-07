@@ -1,6 +1,6 @@
 from typing import Union
 
-from rest_framework.serializers import ListSerializer
+from rest_framework.serializers import ListSerializer, BaseSerializer
 
 from rest_serializer_to_typescript import Transpiler
 from .type_hinting_mapping import type_hinting_mapping
@@ -46,13 +46,13 @@ class SerializerMetadataTypeGenerator:
         pre = ""
         if "child" in data:
             sub_serializer = self.serializer.fields[name].child
-
-            pre = SerializerMetadataTypeGenerator(
-                serializer=sub_serializer,
-                metadata=self.metadata,
-                indent=self.indent + 1
-            ).generate_schema()
-            pre += f"\n\n{' ' * (INDENT * self.indent)}"
+            if issubclass(sub_serializer.__class__, BaseSerializer):
+                pre = SerializerMetadataTypeGenerator(
+                    serializer=sub_serializer,
+                    metadata=self.metadata,
+                    indent=self.indent + 1
+                ).generate_schema()
+                pre += f"\n\n{' ' * (INDENT * self.indent)}"
 
         return f"""{pre}export interface {name} {{
 {' ' * (INDENT * (1 + self.indent))}{joined_fields}

@@ -5,7 +5,8 @@ from django.conf import settings
 from django.core.management import BaseCommand
 from rest_framework.serializers import BaseSerializer, SerializerMetaclass
 
-from rest_serializer_to_typescript import Transpiler
+from rest_serializer_to_typescript import Transpiler, SerializerMetadataTypeGenerator
+from rest_serializer_to_typescript.metadata import APIMetadata
 
 DEFAULT_SETTINGS = {
     "META_DATA": "rest_framework.metadata.SimpleMetadata",
@@ -20,11 +21,12 @@ class Command(BaseCommand):
             **getattr(settings, "REST_SERIALIZERS_TO_TYPESCRIPT", {})
         }
 
-        target_serializers: dict[str, str] = final_settings.get("SERIALIZERS")
+        target_serializers: dict[str, dict[str, str]] = final_settings.get("SERIALIZERS")
         if not target_serializers:
             return
 
-        for serializer_module, export_target in target_serializers.items():
+        for serializer_module, export in target_serializers.items():
+            export_target = export.get("target")
             print(f"Exporting {serializer_module} to {export_target}: Started")
 
             target_path = export_target.split("/")
@@ -49,6 +51,10 @@ class Command(BaseCommand):
 
             typescript = ""
             for serializer in serializers:
+
+                if export.get("with_schema"):
+                    typescript += f"{SerializerMetadataTypeGenerator(serializer=serializer(), metadata=APIMetadata()).generate_schema()}\n\n"
+
                 typescript += f"{Transpiler(serializer()).generate_ts()}\n\n"
 
             with open(export_target, "w") as file:

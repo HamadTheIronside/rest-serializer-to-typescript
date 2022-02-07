@@ -20,6 +20,7 @@ mappings = {
     serializers.DateField: 'string',
     serializers.TimeField: 'string',
     serializers.DurationField: 'string',
-    serializers.DictField: 'Map',
-    serializers.PrimaryKeyRelatedField: "number"
+    serializers.DictField: 'unknown',
+    serializers.PrimaryKeyRelatedField: "number",
+    serializers.JSONField: 'unknown',
 }
