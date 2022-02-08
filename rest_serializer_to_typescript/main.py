@@ -37,14 +37,14 @@ class Transpiler:
 
         data = []
         if __type := getattr(meta, "__type", None):
-            data.append(["__type", f'"{__type}"'])
+            data.append(["__type?", f'"{__type}"'])
         elif modal := getattr(meta, "model", None):
-            data.append(["__type", f'"{modal.__name__.lower()}"'])
+            data.append(["__type?", f'"{modal.__name__.lower()}"'])
 
         if (__set_as_modal := getattr(meta, "__set_as_modal", None)) is not None:
-            data.append(["__is_modal", json.dumps(bool(__set_as_modal))])
+            data.append(["__is_modal?", json.dumps(bool(__set_as_modal))])
         else:
-            data.append(["__is_modal", json.dumps(bool(getattr(meta, "modal", None)))])
+            data.append(["__is_modal?", json.dumps(bool(getattr(meta, "modal", None)))])
 
         return "\n    ".join([f"{field}: {value};" for field, value in data])
 

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rest-serializer-to-typescript"
-version = "0.2.3"
+version = "0.2.4"
 description = ""
 authors = ["Abdollah Keshtkar <hamadkeshtkar@gmail.com>"]
 license = "MIT"
